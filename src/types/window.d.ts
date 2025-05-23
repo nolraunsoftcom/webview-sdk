@@ -2,11 +2,10 @@ declare global {
   interface Window {
     isWebviewInitialized: boolean;
     isWebview: boolean;
+    isInitialized: boolean;
     ReactNativeWebView: any;
     postMessage: (message: string | object) => void;
-    nolraun: {
-      getPushToken: (callback: (token: string) => void) => void;
-    };
+    appify: {};
   }
 }
 
