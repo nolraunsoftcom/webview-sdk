@@ -1,4 +1,5 @@
 import { WebViewBridge } from "./bridge";
+import { Contact } from "./contact";
 import { Environment } from "./environment";
 import { Notification } from "./notification";
 
@@ -7,10 +8,13 @@ import { Notification } from "./notification";
     private bridge: WebViewBridge = new WebViewBridge();
     private notification: Notification;
     private environment: Environment;
+    private contact: Contact;
 
     constructor() {
       this.notification = new Notification(this.bridge);
       this.environment = new Environment(this.bridge);
+      this.contact = new Contact(this.bridge);
+
       this.initialized();
       this.overrideHistory();
     }

@@ -27,7 +27,7 @@ export class WebViewBridge {
     payload?: any
   ): () => void {
     if (this.messageHandlers.has(key)) {
-      console.warn(`WebViewBridge: Duplicate key "${key}".`);
+      console.warn("WebViewBridge: Duplicate key:", key);
       return () => {};
     }
 

@@ -9,6 +9,11 @@ export const MESSAGE_KEY = {
     getCurrentPosition: "GET_CURRENT_POSITION",
   },
 
+  contacts: {
+    checkPermission: "CHECK_CONTACTS_PERMISSION",
+    getContacts: "GET_CONTACTS",
+  },
+
   device: {
     getInfo: "DEVICE_INFO",
   },
