@@ -1,5 +1,5 @@
-import { WebViewBridge } from "./bridge";
-import { MESSAGE_KEY } from "./key";
+import { WebViewBridge } from "../bridge";
+import { MESSAGE_KEY } from "../utils/key";
 
 type ContactItem = {};
 
