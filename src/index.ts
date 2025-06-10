@@ -42,10 +42,8 @@ import { Download } from "./libs/download";
     private barcode: Barcode;
     private design: Design;
     private download: Download;
-    private constructor() {
-      this.initialize();
-      this.overrideHistory();
 
+    constructor() {
       this.design = new Design(this.bridge);
       this.notification = new Notification(this.bridge);
       this.location = new Location(this.bridge);
@@ -64,13 +62,9 @@ import { Download } from "./libs/download";
       this.socialShare = new SocialShare(this.bridge);
       this.barcode = new Barcode(this.bridge);
       this.download = new Download(this.bridge);
-    }
 
-    public static getInstance(): AppifySDK {
-      if (!AppifySDK.instance) {
-        AppifySDK.instance = new AppifySDK();
-      }
-      return AppifySDK.instance;
+      this.initialize();
+      this.overrideHistory();
     }
 
     private overrideHistory() {
@@ -97,21 +91,12 @@ import { Download } from "./libs/download";
       });
     }
 
-    private initialize(data?: {
-      statusbar: {
-        backgroundColor: string;
-        textColor: "dark" | "light";
-      };
-      safearea: {
-        edges: ("top" | "bottom" | "left" | "right")[];
-      };
-    }) {
+    private initialize(data?: {}) {
       this.isInitialized = true;
-      if (!this.environment.isApp) return;
     }
   }
 
   window.isWebviewInitialized = true;
   window.isWebview = true;
-  window.appify = AppifySDK.getInstance();
+  window.appify = new AppifySDK();
 })();

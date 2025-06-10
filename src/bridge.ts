@@ -58,7 +58,7 @@ export class WebViewBridge {
     document.addEventListener("message", handler);
 
     setTimeout(() => {
-      this.postMessage({ key, payload });
+      this.postMessage({ key, value: payload });
     }, 0);
 
     const timeout = setTimeout(() => {

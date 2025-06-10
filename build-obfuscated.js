@@ -19,6 +19,12 @@ async function buildAndObfuscate() {
       platform: "browser",
       target: "es6",
       tsconfig: "tsconfig.json",
+      banner: {
+        js:
+          "/* Built with esbuild and obfuscated | Generated on " +
+          new Date().toISOString() +
+          " */",
+      },
     });
 
     console.log("🔒 Obfuscating code...");
@@ -48,7 +54,14 @@ async function buildAndObfuscate() {
     });
 
     // Write the obfuscated code
-    fs.writeFileSync("dist/index.js", obfuscationResult.getObfuscatedCode());
+    const finalCode = `/*
+ * 🚀 SDK Build Information
+ * Version: ${require("./package.json").version || "unknown"}
+ * Environment: ${process.env.NODE_ENV || "production"}
+ */
+${obfuscationResult.getObfuscatedCode()}`;
+
+    fs.writeFileSync("dist/index.js", finalCode);
 
     // Remove temporary file
     fs.unlinkSync("dist/index-temp.js");
