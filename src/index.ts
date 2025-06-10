@@ -15,6 +15,8 @@ import { SocialShare } from "./libs/socialShare";
 import { Location } from "./libs/location";
 import { Linking } from "./libs/linking";
 import { Barcode } from "./libs/barcode";
+import { Design } from "./libs/design";
+import { Download } from "./libs/download";
 
 (function () {
   class AppifySDK {
@@ -38,11 +40,13 @@ import { Barcode } from "./libs/barcode";
     private socialLogin: SocialLogin;
     private socialShare: SocialShare;
     private barcode: Barcode;
-
+    private design: Design;
+    private download: Download;
     private constructor() {
       this.initialize();
       this.overrideHistory();
 
+      this.design = new Design(this.bridge);
       this.notification = new Notification(this.bridge);
       this.location = new Location(this.bridge);
       this.linking = new Linking(this.bridge);
@@ -59,6 +63,7 @@ import { Barcode } from "./libs/barcode";
       this.socialLogin = new SocialLogin(this.bridge);
       this.socialShare = new SocialShare(this.bridge);
       this.barcode = new Barcode(this.bridge);
+      this.download = new Download(this.bridge);
     }
 
     public static getInstance(): AppifySDK {
@@ -92,8 +97,17 @@ import { Barcode } from "./libs/barcode";
       });
     }
 
-    private initialize() {
+    private initialize(data?: {
+      statusbar: {
+        backgroundColor: string;
+        textColor: "dark" | "light";
+      };
+      safearea: {
+        edges: ("top" | "bottom" | "left" | "right")[];
+      };
+    }) {
       this.isInitialized = true;
+      if (!this.environment.isApp) return;
     }
   }
 
