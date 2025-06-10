@@ -14,6 +14,7 @@ import { SocialLogin } from "./libs/socialLogin";
 import { SocialShare } from "./libs/socialShare";
 import { Location } from "./libs/location";
 import { Linking } from "./libs/linking";
+import { Barcode } from "./libs/barcode";
 
 (function () {
   class AppifySDK {
@@ -36,6 +37,7 @@ import { Linking } from "./libs/linking";
     private clipboard: Clipboard;
     private socialLogin: SocialLogin;
     private socialShare: SocialShare;
+    private barcode: Barcode;
 
     private constructor() {
       this.initialize();
@@ -56,6 +58,7 @@ import { Linking } from "./libs/linking";
       this.clipboard = new Clipboard(this.bridge);
       this.socialLogin = new SocialLogin(this.bridge);
       this.socialShare = new SocialShare(this.bridge);
+      this.barcode = new Barcode(this.bridge);
     }
 
     public static getInstance(): AppifySDK {
