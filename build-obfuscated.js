@@ -35,21 +35,19 @@ async function buildAndObfuscate() {
     // Obfuscate the code
     const obfuscationResult = JavaScriptObfuscator.obfuscate(code, {
       compact: true,
-      controlFlowFlattening: true,
-      controlFlowFlatteningThreshold: 1,
+      controlFlowFlattening: false, // ❌ 꺼주세요
       numbersToExpressions: true,
       simplify: true,
       stringArrayShuffle: true,
-      splitStrings: true,
+      splitStrings: false, // ❌ 꺼주세요
       stringArray: true,
-      stringArrayThreshold: 1,
-      transformObjectKeys: true,
+      stringArrayThreshold: 0.75,
+      transformObjectKeys: false, // ❌ 꺼주세요
       unicodeEscapeSequence: false,
       identifierNamesGenerator: "hexadecimal",
       renameGlobals: false,
-      selfDefending: true,
-      debugProtection: false, // Can cause issues in some environments
-      debugProtectionInterval: 0,
+      selfDefending: false, // ❌ 꺼주세요
+      debugProtection: false,
       disableConsoleOutput: false,
     });
 

@@ -7,4 +7,8 @@ export class Haptic {
   constructor(bridge: WebViewBridge) {
     this.bridge = bridge;
   }
+
+  trigger(type: string) {
+    this.bridge.sendMessage(MESSAGE_KEY.haptic.trigger, () => null, type);
+  }
 }

@@ -15,4 +15,12 @@ export class Notification {
   getToken(callback: (token: string) => void) {
     this.bridge.sendMessage(MESSAGE_KEY.notification.getToken, callback);
   }
+
+  sendLocalNotification(body: { title: string; body: string }) {
+    this.bridge.sendMessage(
+      MESSAGE_KEY.notification.sendLocalNotification,
+      () => null,
+      body
+    );
+  }
 }

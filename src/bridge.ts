@@ -1,4 +1,13 @@
+import { MESSAGE_KEY } from "./utils/key";
+
 type MessageCallback = (value: any) => void;
+
+function getTimeout(key: string) {
+  if (key === MESSAGE_KEY.haptic.trigger) {
+    return 50;
+  }
+  return 1000;
+}
 
 export class WebViewBridge {
   private ReactNativeWebView: any;
@@ -65,7 +74,7 @@ export class WebViewBridge {
       this.messageHandlers.delete(key);
       window.removeEventListener("message", handler);
       document.removeEventListener("message", handler);
-    }, 5000);
+    }, getTimeout(key));
 
     return () => {
       clearTimeout(timeout);
