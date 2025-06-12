@@ -12,6 +12,7 @@ function getTimeout(key: string) {
 export class WebViewBridge {
   private ReactNativeWebView: any;
   private messageHandlers: Map<string, MessageCallback> = new Map();
+  private onMessageHandlers: Map<string, (event: Event) => void> = new Map();
 
   constructor() {
     this.ReactNativeWebView = window.ReactNativeWebView;
@@ -81,6 +82,38 @@ export class WebViewBridge {
       this.messageHandlers.delete(key);
       window.removeEventListener("message", handler);
       document.removeEventListener("message", handler);
+    };
+  }
+
+  public onMessage(key: string, callback: MessageCallback): () => void {
+    // 기존 리스너가 있으면 먼저 제거
+    const prevHandler = this.onMessageHandlers.get(key);
+    if (prevHandler) {
+      window.removeEventListener("message", prevHandler);
+    }
+
+    const handler = (event: Event) => {
+      const message = event as MessageEvent;
+      if (typeof message.data !== "string") return;
+
+      try {
+        const data = JSON.parse(message.data);
+        if (data.key === key) {
+          callback(data.value);
+        }
+      } catch (e) {
+        console.error("WebViewBridge: Invalid message format", e);
+      }
+    };
+
+    window.addEventListener("message", handler);
+    document.addEventListener("message", handler);
+    this.onMessageHandlers.set(key, handler);
+
+    return () => {
+      window.removeEventListener("message", handler);
+      document.removeEventListener("message", handler);
+      this.onMessageHandlers.delete(key);
     };
   }
 }

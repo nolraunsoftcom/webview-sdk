@@ -28,4 +28,10 @@ export const MESSAGE_KEY = {
     logout: "KAKAO_LOGOUT",
     unlink: "KAKAO_UNLINK",
   },
+
+  camera: {
+    checkPermission: "CHECK_CAMERA_PERMISSION",
+    barcodeScan: "BARCODE_SCAN",
+    barcodeScanReceiveMessage: "BARCODE_SCAN_RECEIVE_MESSAGE",
+  },
 };

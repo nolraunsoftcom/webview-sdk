@@ -17,6 +17,7 @@ import { Linking } from "./libs/linking";
 import { Barcode } from "./libs/barcode";
 import { Design } from "./libs/design";
 import { Download } from "./libs/download";
+import { Camera } from "./libs/camera";
 
 (function () {
   class AppifySDK {
@@ -42,7 +43,7 @@ import { Download } from "./libs/download";
     private barcode: Barcode;
     private design: Design;
     private download: Download;
-
+    private camera: Camera;
     constructor() {
       this.design = new Design(this.bridge);
       this.notification = new Notification(this.bridge);
@@ -62,6 +63,7 @@ import { Download } from "./libs/download";
       this.socialShare = new SocialShare(this.bridge);
       this.barcode = new Barcode(this.bridge);
       this.download = new Download(this.bridge);
+      this.camera = new Camera(this.bridge);
 
       this.initialize();
       this.overrideHistory();
