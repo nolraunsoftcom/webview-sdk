@@ -2,13 +2,6 @@ import { MESSAGE_KEY } from "./utils/key";
 
 type MessageCallback = (value: any) => void;
 
-function getTimeout(key: string) {
-  if (key === MESSAGE_KEY.haptic.trigger) {
-    return 50;
-  }
-  return 1000;
-}
-
 export class WebViewBridge {
   private ReactNativeWebView: any;
   private messageHandlers: Map<string, MessageCallback> = new Map();
@@ -53,7 +46,10 @@ export class WebViewBridge {
       try {
         const data = JSON.parse(message.data);
         if (data.key === key) {
-          this.messageHandlers.get(key)?.(data.value);
+          const callback = this.messageHandlers.get(key);
+          if (callback) {
+            callback(data.value);
+          }
           this.messageHandlers.delete(key);
           window.removeEventListener("message", handler);
           document.removeEventListener("message", handler);
@@ -71,14 +67,7 @@ export class WebViewBridge {
       this.postMessage({ key, value: payload });
     }, 0);
 
-    const timeout = setTimeout(() => {
-      this.messageHandlers.delete(key);
-      window.removeEventListener("message", handler);
-      document.removeEventListener("message", handler);
-    }, getTimeout(key));
-
     return () => {
-      clearTimeout(timeout);
       this.messageHandlers.delete(key);
       window.removeEventListener("message", handler);
       document.removeEventListener("message", handler);

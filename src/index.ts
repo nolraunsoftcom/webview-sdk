@@ -10,7 +10,7 @@ import { Notification } from "./libs/notification";
 import { Biometrics } from "./libs/biometrics";
 import { AppReview } from "./libs/appReview";
 import { Clipboard } from "./libs/clipboard";
-import { SocialLogin } from "./libs/socialLogin";
+import { Auth } from "./libs/auth";
 import { SocialShare } from "./libs/socialShare";
 import { Location } from "./libs/location";
 import { Linking } from "./libs/linking";
@@ -18,6 +18,7 @@ import { Barcode } from "./libs/barcode";
 import { Design } from "./libs/design";
 import { Download } from "./libs/download";
 import { Camera } from "./libs/camera";
+import { Analytics } from "./libs/analytics";
 
 (function () {
   class AppifySDK {
@@ -25,6 +26,7 @@ import { Camera } from "./libs/camera";
     private bridge: WebViewBridge = new WebViewBridge();
     private isInitialized: boolean = false;
 
+    private analytics: Analytics;
     private notification: Notification;
     private location: Location;
     private linking: Linking;
@@ -38,13 +40,14 @@ import { Camera } from "./libs/camera";
     private biometrics: Biometrics;
     private appReview: AppReview;
     private clipboard: Clipboard;
-    private socialLogin: SocialLogin;
+    private auth: Auth;
     private socialShare: SocialShare;
     private barcode: Barcode;
     private design: Design;
     private download: Download;
     private camera: Camera;
     constructor() {
+      this.analytics = new Analytics(this.bridge);
       this.design = new Design(this.bridge);
       this.notification = new Notification(this.bridge);
       this.location = new Location(this.bridge);
@@ -59,7 +62,7 @@ import { Camera } from "./libs/camera";
       this.biometrics = new Biometrics(this.bridge);
       this.appReview = new AppReview(this.bridge);
       this.clipboard = new Clipboard(this.bridge);
-      this.socialLogin = new SocialLogin(this.bridge);
+      this.auth = new Auth(this.bridge);
       this.socialShare = new SocialShare(this.bridge);
       this.barcode = new Barcode(this.bridge);
       this.download = new Download(this.bridge);

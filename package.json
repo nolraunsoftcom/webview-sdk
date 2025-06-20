@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf dist/*",
     "build": "node esbuild.config.js",
-    "build:obfuscated": "pnpm run clean && node build-obfuscated.js",
+    "build:prod": "pnpm run clean && node build-obfuscated.js",
     "build:all": "pnpm run clean && pnpm run build && pnpm run build:obfuscated"
   },
   "keywords": [],
