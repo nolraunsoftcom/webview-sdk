@@ -79,6 +79,8 @@ export class WebViewBridge {
     const prevHandler = this.onMessageHandlers.get(key);
     if (prevHandler) {
       window.removeEventListener("message", prevHandler);
+      document.removeEventListener("message", prevHandler);
+      this.onMessageHandlers.delete(key);
     }
 
     const handler = (event: Event) => {

@@ -19,10 +19,22 @@ export class Location {
   }
 
   checkPermission(callback: (permission: boolean) => void) {
-    this.bridge.sendMessage(MESSAGE_KEY.location.checkPermission, callback);
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.location.checkPermission,
+      (response: boolean) => {
+        callback(response);
+        unmounted();
+      }
+    );
   }
 
   getCurrentPosition(callback: (position: Position) => void) {
-    this.bridge.sendMessage(MESSAGE_KEY.location.getCurrentPosition, callback);
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.location.getCurrentPosition,
+      (response: Position) => {
+        callback(response);
+        unmounted();
+      }
+    );
   }
 }

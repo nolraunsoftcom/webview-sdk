@@ -9,14 +9,31 @@ export class Camera {
   }
 
   checkPermission(callback: (permission: boolean) => void) {
-    this.bridge.sendMessage(MESSAGE_KEY.camera.checkPermission, callback);
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.camera.checkPermission,
+      (response: boolean) => {
+        callback(response);
+        unmounted();
+      }
+    );
   }
 
   barcodeScan() {
-    this.bridge.sendMessage(MESSAGE_KEY.camera.barcodeScan, () => {});
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.camera.barcodeScan,
+      () => {
+        unmounted();
+      }
+    );
   }
 
-  barcodeScanReceiveMessage({ cb }: { cb: (result: string) => void }) {
-    this.bridge.onMessage(MESSAGE_KEY.camera.barcodeScanReceiveMessage, cb);
+  barcodeScanReceiveMessage(callback: (result: string) => void) {
+    const unmounted = this.bridge.onMessage(
+      MESSAGE_KEY.camera.barcodeScanReceiveMessage,
+      (response: string) => {
+        callback(response);
+        unmounted();
+      }
+    );
   }
 }

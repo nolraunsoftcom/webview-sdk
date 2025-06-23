@@ -9,6 +9,22 @@ export class Device {
   }
 
   getInfo(callback: (info: {}) => void) {
-    this.bridge.sendMessage(MESSAGE_KEY.device.getInfo, callback);
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.device.getInfo,
+      (response: {}) => {
+        callback(response);
+        unmounted();
+      }
+    );
+  }
+
+  getIdfaAdid(callback: (id: string | null) => void) {
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.device.getIdfaAdid,
+      (response: string) => {
+        callback(response);
+        unmounted();
+      }
+    );
   }
 }

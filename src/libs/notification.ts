@@ -9,17 +9,31 @@ export class Notification {
   }
 
   checkPermission(callback: (permission: boolean) => void) {
-    this.bridge.sendMessage(MESSAGE_KEY.notification.checkPermission, callback);
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.notification.checkPermission,
+      (response: boolean) => {
+        callback(response);
+        unmounted();
+      }
+    );
   }
 
   getToken(callback: (token: string) => void) {
-    this.bridge.sendMessage(MESSAGE_KEY.notification.getToken, callback);
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.notification.getToken,
+      (response: string) => {
+        callback(response);
+        unmounted();
+      }
+    );
   }
 
   sendLocalNotification(body: { title: string; body: string }) {
-    this.bridge.sendMessage(
+    const unmounted = this.bridge.sendMessage(
       MESSAGE_KEY.notification.sendLocalNotification,
-      () => null,
+      () => {
+        unmounted();
+      },
       body
     );
   }

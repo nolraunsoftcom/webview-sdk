@@ -1,21 +1,20 @@
 import { WebViewBridge } from "../bridge";
 import { MESSAGE_KEY } from "../utils/key";
 
-export class Haptic {
+export class AppReview {
   private bridge: WebViewBridge;
 
   constructor(bridge: WebViewBridge) {
     this.bridge = bridge;
   }
 
-  trigger(type: string) {
+  request(callback: (result: boolean) => void) {
     const unmounted = this.bridge.sendMessage(
-      MESSAGE_KEY.haptic.trigger,
-      () => {
+      MESSAGE_KEY.review.request,
+      (response: boolean) => {
+        callback(response);
         unmounted();
-      },
-      type
+      }
     );
-    return unmounted;
   }
 }

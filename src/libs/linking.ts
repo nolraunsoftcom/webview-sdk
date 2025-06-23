@@ -9,18 +9,33 @@ export class Linking {
   }
 
   openSettings() {
-    this.bridge.sendMessage(MESSAGE_KEY.linking.openSettings, () => null);
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.linking.openSettings,
+      () => {
+        unmounted();
+      }
+    );
+    return unmounted;
   }
 
   externalBrowser(url: string) {
-    this.bridge.sendMessage(
+    const unmounted = this.bridge.sendMessage(
       MESSAGE_KEY.linking.externalBrowser,
-      () => null,
+      () => {
+        unmounted();
+      },
       url
     );
   }
 
   inappBrowser(url: string) {
-    this.bridge.sendMessage(MESSAGE_KEY.linking.inappBrowser, () => null, url);
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.linking.inappBrowser,
+      () => {
+        unmounted();
+      },
+      url
+    );
+    return unmounted;
   }
 }

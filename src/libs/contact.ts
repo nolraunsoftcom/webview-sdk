@@ -11,10 +11,22 @@ export class Contact {
   }
 
   checkPermission(callback: (permission: boolean) => void) {
-    this.bridge.sendMessage(MESSAGE_KEY.contacts.checkPermission, callback);
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.contacts.checkPermission,
+      (response: boolean) => {
+        callback(response);
+        unmounted();
+      }
+    );
   }
 
   getAllContact(callback: (position: ContactItem) => void) {
-    this.bridge.sendMessage(MESSAGE_KEY.contacts.getContacts, callback);
+    const unmounted = this.bridge.sendMessage(
+      MESSAGE_KEY.contacts.getContacts,
+      (response: ContactItem) => {
+        callback(response);
+        unmounted();
+      }
+    );
   }
 }
