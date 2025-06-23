@@ -11,7 +11,11 @@ export class Device {
   getInfo(callback: (info: {}) => void) {
     const unmounted = this.bridge.sendMessage(
       MESSAGE_KEY.device.getInfo,
-      (response: {}) => {
+      (response: {
+        platform: "ios" | "android";
+        appVersion: string;
+        uniqueId: string;
+      }) => {
         callback(response);
         unmounted();
       }
