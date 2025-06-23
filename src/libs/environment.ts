@@ -11,7 +11,7 @@ export class Environment {
    * @returns true if the user is on an app
    */
   get isApp() {
-    return window.navigator.userAgent.includes("Appify");
+    return window.navigator.userAgent.includes("appify");
   }
 
   /**
