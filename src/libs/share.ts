@@ -18,6 +18,7 @@ export class Share {
       options
     );
   }
+
   kakaoShare(options: any, callback: (result: any) => void) {
     const unmounted = this.bridge.sendMessage(
       MESSAGE_KEY.share.kakaoShare,
