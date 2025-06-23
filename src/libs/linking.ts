@@ -15,7 +15,6 @@ export class Linking {
         unmounted();
       }
     );
-    return unmounted;
   }
 
   externalBrowser(url: string) {
@@ -36,6 +35,5 @@ export class Linking {
       },
       url
     );
-    return unmounted;
   }
 }

@@ -34,11 +34,6 @@ export class WebViewBridge {
       return () => {};
     }
 
-    if (!this.ReactNativeWebView) {
-      console.warn("WebViewBridge: bridge not available.");
-      return () => {};
-    }
-
     const handler = (event: Event) => {
       const message = event as MessageEvent;
       if (typeof message.data !== "string") return;

@@ -16,6 +16,7 @@ import { Linking } from "./libs/linking";
 import { Download } from "./libs/download";
 import { Camera } from "./libs/camera";
 import { Analytics } from "./libs/analytics";
+import { MESSAGE_KEY } from "./utils/key";
 
 (function () {
   class AppifySDK {
@@ -58,8 +59,8 @@ import { Analytics } from "./libs/analytics";
       this.download = new Download(this.bridge);
       this.camera = new Camera(this.bridge);
 
-      this.initialize();
       this.overrideHistory();
+      this.isInitialized = true;
     }
 
     private overrideHistory() {
@@ -86,8 +87,25 @@ import { Analytics } from "./libs/analytics";
       });
     }
 
-    private initialize(data?: {}) {
-      this.isInitialized = true;
+    public initialize(data?: {
+      bounces?: boolean;
+      hideScrollbar?: boolean;
+      enableRefresh?: boolean;
+      statusBar?: {
+        barStyle: "dark-content" | "light-content";
+        backgroundColor: string;
+      };
+      safeArea?: {
+        edge: ("top" | "bottom" | "left" | "right")[];
+      };
+    }) {
+      const unmounted = this.bridge.sendMessage(
+        MESSAGE_KEY.initialize.initialize,
+        () => {
+          unmounted();
+        },
+        data
+      );
     }
   }
 
