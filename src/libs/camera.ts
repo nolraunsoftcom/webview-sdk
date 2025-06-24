@@ -27,13 +27,12 @@ export class Camera {
     );
   }
 
-  barcodeScanReceiveMessage(callback: (result: string) => void) {
+  barcodeScanEventListener(callback: (result: string) => void) {
     const unmounted = this.bridge.onMessage(
       MESSAGE_KEY.camera.barcodeScanReceiveMessage,
-      (response: string) => {
-        callback(response);
-        unmounted();
-      }
+      callback
     );
+
+    return unmounted;
   }
 }

@@ -97,9 +97,9 @@ export class WebViewBridge {
     this.onMessageHandlers.set(key, handler);
 
     return () => {
+      this.onMessageHandlers.delete(key);
       window.removeEventListener("message", handler);
       document.removeEventListener("message", handler);
-      this.onMessageHandlers.delete(key);
     };
   }
 }
