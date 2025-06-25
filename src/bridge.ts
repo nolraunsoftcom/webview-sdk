@@ -1,5 +1,3 @@
-import { MESSAGE_KEY } from "./utils/key";
-
 type MessageCallback = (value: any) => void;
 
 export class WebViewBridge {
@@ -29,11 +27,6 @@ export class WebViewBridge {
     callback: MessageCallback,
     payload?: any
   ): () => void {
-    if (this.messageHandlers.has(key)) {
-      console.warn("WebViewBridge: Duplicate key:", key);
-      return () => {};
-    }
-
     const handler = (event: Event) => {
       const message = event as MessageEvent;
       if (typeof message.data !== "string") return;
