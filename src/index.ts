@@ -1,5 +1,5 @@
 import { WebViewBridge } from "./bridge";
-import { Contact } from "./libs/contact";
+import { Contacts } from "./libs/contacts";
 import { Device } from "./libs/device";
 import { Environment } from "./libs/environment";
 import { Haptic } from "./libs/haptic";
@@ -28,7 +28,6 @@ import { MESSAGE_KEY } from "./utils/key";
     private location: Location;
     private linking: Linking;
     private environment: Environment;
-    private contact: Contact;
     private device: Device;
     private share: Share;
     private storage: Storage;
@@ -40,13 +39,13 @@ import { MESSAGE_KEY } from "./utils/key";
     private auth: Auth;
     private download: Download;
     private camera: Camera;
+    private contacts: Contacts;
     constructor() {
       this.analytics = new Analytics(this.bridge);
       this.notification = new Notification(this.bridge);
       this.location = new Location(this.bridge);
       this.linking = new Linking(this.bridge);
       this.environment = new Environment(this.bridge);
-      this.contact = new Contact(this.bridge);
       this.device = new Device(this.bridge);
       this.share = new Share(this.bridge);
       this.storage = new Storage(this.bridge);
@@ -58,6 +57,7 @@ import { MESSAGE_KEY } from "./utils/key";
       this.auth = new Auth(this.bridge);
       this.download = new Download(this.bridge);
       this.camera = new Camera(this.bridge);
+      this.contacts = new Contacts(this.bridge);
 
       this.overrideHistory();
       this.isInitialized = true;
