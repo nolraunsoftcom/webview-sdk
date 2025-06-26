@@ -32,20 +32,20 @@ export class KakaoAuth {
     );
   }
 
-  logout(callback: (body: any) => void = () => null) {
+  logout(callback: (body: boolean) => void = () => null) {
     const unmounted = this.bridge.sendMessage(
       MESSAGE_KEY.auth.kakao.logout,
-      (body: any) => {
+      (body: boolean) => {
         callback(body);
         unmounted();
       }
     );
   }
 
-  unlink(callback: (body: any) => void = () => null) {
+  unlink(callback: (body: boolean) => void = () => null) {
     const unmounted = this.bridge.sendMessage(
       MESSAGE_KEY.auth.kakao.unlink,
-      (body: any) => {
+      (body: boolean) => {
         callback(body);
         unmounted();
       }
