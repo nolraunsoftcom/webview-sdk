@@ -76,4 +76,7 @@ export const MESSAGE_KEY = {
   initialize: {
     initialize: "APP_INITIALIZE",
   },
+  event: {
+    appStateChange: "APP_STATE_CHANGE",
+  },
 };

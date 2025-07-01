@@ -17,6 +17,7 @@ import { Download } from "./libs/download";
 import { Camera } from "./libs/camera";
 import { Analytics } from "./libs/analytics";
 import { MESSAGE_KEY } from "./utils/key";
+import { Event } from "./libs/event";
 
 (function () {
   class AppifySDK {
@@ -40,6 +41,7 @@ import { MESSAGE_KEY } from "./utils/key";
     private download: Download;
     private camera: Camera;
     private contacts: Contacts;
+    private event: Event;
     constructor() {
       this.analytics = new Analytics(this.bridge);
       this.notification = new Notification(this.bridge);
@@ -58,6 +60,7 @@ import { MESSAGE_KEY } from "./utils/key";
       this.download = new Download(this.bridge);
       this.camera = new Camera(this.bridge);
       this.contacts = new Contacts(this.bridge);
+      this.event = new Event(this.bridge);
 
       this.overrideHistory();
       this.isInitialized = true;
