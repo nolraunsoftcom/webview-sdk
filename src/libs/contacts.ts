@@ -3,7 +3,7 @@ import { MESSAGE_KEY } from "../utils/key";
 
 type ContactItem = {};
 
-export class Contact {
+export class Contacts {
   private bridge: WebViewBridge;
 
   constructor(bridge: WebViewBridge) {

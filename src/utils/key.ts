@@ -1,4 +1,8 @@
 export const MESSAGE_KEY = {
+  download: {
+    downloadFile: "DOWNLOAD_FILE",
+    imageFile: "DOWNLOAD_IMAGE",
+  },
   analytics: {
     logEvent: "LOG_EVENT",
   },
